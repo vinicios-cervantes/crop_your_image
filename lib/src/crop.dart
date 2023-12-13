@@ -705,10 +705,14 @@ Uint8List _doCropCircle(List<dynamic> cropData) {
     rect.left + rect.width / 2,
     rect.top + rect.height / 2,
   );
+
+  //https://github.com/brendan-duncan/image/issues/470
+  final imageRgb = originalImage.convert(numChannels: 4);
+
   return Uint8List.fromList(
     image.encodePng(
       image.copyCropCircle(
-        originalImage,
+        imageRgb,
         centerX: center.xi,
         centerY: center.yi,
         radius: min(rect.width, rect.height) ~/ 2,
